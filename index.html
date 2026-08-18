@@ -27,6 +27,7 @@
             background: #111827;
             color: white;
             padding: 20px 40px;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -47,7 +48,7 @@
         }
 
         /* =========================
-           MAIN CONTAINER
+           CONTAINER
         ========================= */
 
         .container {
@@ -64,7 +65,10 @@
             background: white;
             border-radius: 14px;
             padding: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.06);
+
             margin-bottom: 35px;
         }
 
@@ -92,11 +96,16 @@
         textarea,
         input {
             width: 100%;
+
             border: 1px solid #d1d5db;
             border-radius: 9px;
+
             padding: 13px;
+
             font-size: 15px;
+
             outline: none;
+
             transition: 0.2s;
         }
 
@@ -108,7 +117,10 @@
         textarea:focus,
         input:focus {
             border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(59, 130, 246, 0.1);
         }
 
         .form-group {
@@ -116,7 +128,7 @@
         }
 
         /* =========================
-           KEY INPUT
+           KEY
         ========================= */
 
         .key-wrapper {
@@ -125,27 +137,39 @@
 
         .toggle-key {
             position: absolute;
+
             right: 12px;
             top: 11px;
+
             border: none;
             background: transparent;
+
             cursor: pointer;
+
             color: #6b7280;
         }
 
         /* =========================
-           BUTTON
+           PRIMARY BUTTON
         ========================= */
 
         .primary-btn {
             background: #2563eb;
+
             color: white;
+
             border: none;
+
             border-radius: 9px;
+
             padding: 13px 22px;
+
             font-size: 15px;
+
             font-weight: bold;
+
             cursor: pointer;
+
             transition: 0.2s;
         }
 
@@ -164,8 +188,11 @@
 
         .feed-header {
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
             margin-bottom: 18px;
         }
 
@@ -175,9 +202,13 @@
 
         .refresh-btn {
             border: 1px solid #d1d5db;
+
             background: white;
+
             padding: 9px 15px;
+
             border-radius: 8px;
+
             cursor: pointer;
         }
 
@@ -196,15 +227,23 @@
 
         .message-card {
             background: white;
+
             border-radius: 12px;
+
             padding: 22px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+
+            box-shadow:
+                0 3px 12px
+                rgba(0, 0, 0, 0.05);
         }
 
         .message-top {
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
             margin-bottom: 14px;
         }
 
@@ -223,20 +262,30 @@
 
         .cipher-box {
             background: #111827;
+
             color: #d1d5db;
+
             border-radius: 8px;
+
             padding: 15px;
+
             font-family: monospace;
+
             font-size: 13px;
+
             line-height: 1.6;
+
             word-break: break-all;
+
             margin-bottom: 15px;
+
             max-height: 150px;
+
             overflow-y: auto;
         }
 
         /* =========================
-           DECRYPT AREA
+           DECRYPT
         ========================= */
 
         .decrypt-area {
@@ -250,11 +299,17 @@
 
         .decrypt-btn {
             background: #10b981;
+
             color: white;
+
             border: none;
+
             border-radius: 8px;
+
             padding: 0 20px;
+
             font-weight: bold;
+
             cursor: pointer;
         }
 
@@ -263,45 +318,56 @@
         }
 
         /* =========================
-           DECRYPT RESULT
+           RESULT
         ========================= */
 
         .result {
             display: none;
+
             margin-top: 15px;
+
             padding: 14px;
+
             border-radius: 8px;
+
             background: #ecfdf5;
+
             border: 1px solid #a7f3d0;
+
             color: #065f46;
+
             word-break: break-word;
         }
 
         .result.error {
             background: #fef2f2;
+
             border-color: #fecaca;
+
             color: #991b1b;
         }
 
         /* =========================
-           EMPTY STATE
+           EMPTY
         ========================= */
 
         .empty {
             background: white;
+
             padding: 40px;
+
             text-align: center;
+
             border-radius: 12px;
+
             color: #6b7280;
         }
 
-        /* =========================
-           LOADING
-        ========================= */
-
         .loading {
             text-align: center;
+
             padding: 30px;
+
             color: #6b7280;
         }
 
@@ -336,14 +402,16 @@
                 gap: 10px;
             }
         }
+
     </style>
 </head>
 
 <body>
 
-    <!-- =========================
+
+    <!-- =====================================================
          HEADER
-    ========================= -->
+    ====================================================== -->
 
     <header>
 
@@ -361,15 +429,17 @@
     </header>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          MAIN
-    ========================= -->
+    ====================================================== -->
 
     <main class="container">
 
-        <!-- =========================
+
+        <!-- =================================================
              CREATE MESSAGE
-        ========================= -->
+        ================================================== -->
 
         <section class="create-card">
 
@@ -378,9 +448,9 @@
             </h1>
 
             <p>
-                Write a message and protect it with
-                a secret key. Other users can try to
-                decrypt it.
+                Write a message and protect it
+                with a secret key. Other users
+                can try to decrypt it.
             </p>
 
 
@@ -429,7 +499,7 @@
             </div>
 
 
-            <!-- ENCRYPT BUTTON -->
+            <!-- ENCRYPT -->
 
             <button
                 class="primary-btn"
@@ -442,9 +512,10 @@
         </section>
 
 
-        <!-- =========================
+
+        <!-- =================================================
              PUBLIC FEED
-        ========================= -->
+        ================================================== -->
 
         <section>
 
@@ -480,18 +551,21 @@
     </main>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          JAVASCRIPT
-    ========================= -->
+    ====================================================== -->
 
     <script>
 
+
         /* =====================================================
-           GOOGLE APPS SCRIPT URL
+           YOUR GOOGLE APPS SCRIPT URL
         ===================================================== */
 
         const API_URL =
-            "https://script.google.com/macros/s/AKfycbwrff47JcTFG5N1lPnNLD82kGJBpm4p_jmAASknBG91KMAG0nu1t2Kw7foOOrE6xz8nrg/exec";
+            "https://script.google.com/macros/s/AKfycbzGnqZKkRvFGb8kzC5pz76ikLYPiayNL8J3WxQrAWQII2A5XtCVwkZiZLCObVuYjzjQ4w/exec";
+
 
 
         /* =====================================================
@@ -508,8 +582,9 @@
         );
 
 
+
         /* =====================================================
-           SHOW / HIDE SECRET KEY
+           SHOW / HIDE KEY
         ===================================================== */
 
         function toggleKey(id) {
@@ -518,30 +593,38 @@
                 document.getElementById(id);
 
             const button =
-                input.parentElement.querySelector(
+                input.parentElement
+                .querySelector(
                     ".toggle-key"
                 );
 
 
-            if (input.type === "password") {
+            if (
+                input.type === "password"
+            ) {
 
                 input.type = "text";
 
-                button.textContent = "Hide";
+                button.textContent =
+                    "Hide";
 
-            } else {
+            }
+
+            else {
 
                 input.type = "password";
 
-                button.textContent = "Show";
+                button.textContent =
+                    "Show";
 
             }
 
         }
 
 
+
         /* =====================================================
-           DERIVE AES KEY USING PBKDF2
+           DERIVE AES KEY
         ===================================================== */
 
         async function deriveKey(
@@ -554,7 +637,9 @@
 
 
             const passwordBytes =
-                encoder.encode(password);
+                encoder.encode(
+                    password
+                );
 
 
             const baseKey =
@@ -570,6 +655,7 @@
 
 
             return crypto.subtle.deriveKey(
+
                 {
                     name: "PBKDF2",
 
@@ -594,13 +680,15 @@
                     "encrypt",
                     "decrypt"
                 ]
+
             );
 
         }
 
 
+
         /* =====================================================
-           ARRAY BUFFER TO BASE64
+           ARRAY BUFFER → BASE64
         ===================================================== */
 
         function arrayBufferToBase64(
@@ -612,7 +700,8 @@
 
             let binary = "";
 
-            const chunkSize = 0x8000;
+            const chunkSize =
+                0x8000;
 
 
             for (
@@ -640,8 +729,9 @@
         }
 
 
+
         /* =====================================================
-           BASE64 TO ARRAY BUFFER
+           BASE64 → ARRAY BUFFER
         ===================================================== */
 
         function base64ToArrayBuffer(
@@ -675,8 +765,9 @@
         }
 
 
+
         /* =====================================================
-           ENCRYPT MESSAGE
+           ENCRYPT
            
            FORMAT:
 
@@ -692,23 +783,17 @@
                 new TextEncoder();
 
 
-            /* Generate random salt */
-
             const salt =
                 crypto.getRandomValues(
                     new Uint8Array(16)
                 );
 
 
-            /* Generate random IV */
-
             const iv =
                 crypto.getRandomValues(
                     new Uint8Array(12)
                 );
 
-
-            /* Generate AES key */
 
             const key =
                 await deriveKey(
@@ -717,10 +802,9 @@
                 );
 
 
-            /* Encrypt */
-
             const encrypted =
                 await crypto.subtle.encrypt(
+
                     {
                         name: "AES-GCM",
 
@@ -732,10 +816,9 @@
                     encoder.encode(
                         plaintext
                     )
+
                 );
 
-
-            /* Convert to Base64 */
 
             const saltBase64 =
                 arrayBufferToBase64(
@@ -755,8 +838,6 @@
                 );
 
 
-            /* Final ciphertext */
-
             return (
                 saltBase64 +
                 "." +
@@ -768,8 +849,9 @@
         }
 
 
+
         /* =====================================================
-           DECRYPT MESSAGE
+           DECRYPT
         ===================================================== */
 
         async function decryptMessage(
@@ -781,7 +863,9 @@
                 encryptedText.split(".");
 
 
-            if (parts.length !== 3) {
+            if (
+                parts.length !== 3
+            ) {
 
                 throw new Error(
                     "Invalid ciphertext format."
@@ -789,8 +873,6 @@
 
             }
 
-
-            /* Extract salt */
 
             const salt =
                 new Uint8Array(
@@ -800,8 +882,6 @@
                 );
 
 
-            /* Extract IV */
-
             const iv =
                 new Uint8Array(
                     base64ToArrayBuffer(
@@ -810,15 +890,11 @@
                 );
 
 
-            /* Extract ciphertext */
-
             const ciphertext =
                 base64ToArrayBuffer(
                     parts[2]
                 );
 
-
-            /* Derive key */
 
             const key =
                 await deriveKey(
@@ -827,10 +903,9 @@
                 );
 
 
-            /* Decrypt */
-
             const decrypted =
                 await crypto.subtle.decrypt(
+
                     {
                         name: "AES-GCM",
 
@@ -840,6 +915,7 @@
                     key,
 
                     ciphertext
+
                 );
 
 
@@ -851,24 +927,29 @@
         }
 
 
+
         /* =====================================================
-           CREATE AND PUBLISH MESSAGE
+           CREATE MESSAGE
         ===================================================== */
 
         async function createMessage() {
 
             const message =
                 document
-                    .getElementById("message")
-                    .value
-                    .trim();
+                .getElementById(
+                    "message"
+                )
+                .value
+                .trim();
 
 
             const key =
                 document
-                    .getElementById("secretKey")
-                    .value
-                    .trim();
+                .getElementById(
+                    "secretKey"
+                )
+                .value
+                .trim();
 
 
             const button =
@@ -876,8 +957,6 @@
                     "encryptBtn"
                 );
 
-
-            /* Validate message */
 
             if (!message) {
 
@@ -889,8 +968,6 @@
 
             }
 
-
-            /* Validate key */
 
             if (!key) {
 
@@ -905,7 +982,8 @@
 
             try {
 
-                button.disabled = true;
+                button.disabled =
+                    true;
 
                 button.textContent =
                     "Encrypting...";
@@ -928,18 +1006,19 @@
                         {
                             method: "POST",
 
-                            body: JSON.stringify({
+                            body:
+                                JSON.stringify({
 
-                                cipherText:
-                                    cipherText,
+                                    cipherText:
+                                        cipherText,
 
-                                plaintext:
-                                    message,
+                                    plaintext:
+                                        message,
 
-                                key:
-                                    key
+                                    key:
+                                        key
 
-                            })
+                                })
                         }
                     );
 
@@ -958,15 +1037,19 @@
                 }
 
 
-                /* Clear fields */
+                /* Clear inputs */
 
                 document
-                    .getElementById("message")
+                    .getElementById(
+                        "message"
+                    )
                     .value = "";
 
 
                 document
-                    .getElementById("secretKey")
+                    .getElementById(
+                        "secretKey"
+                    )
                     .value = "";
 
 
@@ -975,7 +1058,7 @@
                 );
 
 
-                /* Refresh feed */
+                /* Reload feed */
 
                 loadMessages();
 
@@ -983,7 +1066,9 @@
 
             catch (error) {
 
-                console.error(error);
+                console.error(
+                    error
+                );
 
                 alert(
                     "Error: " +
@@ -994,7 +1079,8 @@
 
             finally {
 
-                button.disabled = false;
+                button.disabled =
+                    false;
 
                 button.textContent =
                     "Encrypt & Publish";
@@ -1002,6 +1088,7 @@
             }
 
         }
+
 
 
         /* =====================================================
@@ -1033,8 +1120,7 @@
 
                 const response =
                     await fetch(
-                        API_URL +
-                        "?action=messages"
+                        API_URL
                     );
 
 
@@ -1064,7 +1150,9 @@
 
             catch (error) {
 
-                console.error(error);
+                console.error(
+                    error
+                );
 
 
                 status.textContent =
@@ -1075,7 +1163,7 @@
                     <div class="empty">
                         Unable to load the public feed.
                         <br><br>
-                        Please check your Google Apps Script
+                        Check your Google Apps Script
                         deployment and permissions.
                     </div>
                 `;
@@ -1085,8 +1173,9 @@
         }
 
 
+
         /* =====================================================
-           DISPLAY PUBLIC MESSAGES
+           DISPLAY MESSAGES
         ===================================================== */
 
         function displayMessages(
@@ -1099,8 +1188,6 @@
                 );
 
 
-            /* No messages */
-
             if (
                 !messages ||
                 messages.length === 0
@@ -1109,7 +1196,7 @@
                 feed.innerHTML = `
                     <div class="empty">
                         No encrypted messages yet.
-                        <br>
+                        <br><br>
                         Be the first to publish one!
                     </div>
                 `;
@@ -1138,22 +1225,11 @@
                         "message-card";
 
 
-                    const date =
-                        new Date(
-                            message.timestamp
-                        );
-
-
-                    /*
-                     * Build card using DOM instead
-                     * of inserting untrusted
-                     * ciphertext directly.
-                     */
-
                     const top =
                         document.createElement(
                             "div"
                         );
+
 
                     top.className =
                         "message-top";
@@ -1164,13 +1240,17 @@
                             "div"
                         );
 
+
                     number.className =
                         "message-number";
 
 
                     number.textContent =
                         "Message #" +
-                        (messages.length - index);
+                        (
+                            messages.length -
+                            index
+                        );
 
 
                     const timestamp =
@@ -1178,17 +1258,23 @@
                             "div"
                         );
 
+
                     timestamp.className =
                         "timestamp";
 
 
                     timestamp.textContent =
-                        formatDate(date);
+                        formatDate(
+                            new Date(
+                                message.timestamp
+                            )
+                        );
 
 
                     top.appendChild(
                         number
                     );
+
 
                     top.appendChild(
                         timestamp
@@ -1202,6 +1288,7 @@
                             "div"
                         );
 
+
                     cipherBox.className =
                         "cipher-box";
 
@@ -1210,12 +1297,13 @@
                         message.cipherText;
 
 
-                    /* Decrypt area */
+                    /* Decryption area */
 
                     const decryptArea =
                         document.createElement(
                             "div"
                         );
+
 
                     decryptArea.className =
                         "decrypt-area";
@@ -1236,7 +1324,8 @@
 
 
                     keyInput.id =
-                        "key-" + index;
+                        "key-" +
+                        index;
 
 
                     const decryptButton =
@@ -1264,7 +1353,8 @@
 
 
                     result.id =
-                        "result-" + index;
+                        "result-" +
+                        index;
 
 
                     decryptButton.onclick =
@@ -1318,6 +1408,7 @@
         }
 
 
+
         /* =====================================================
            TRY DECRYPT
         ===================================================== */
@@ -1329,13 +1420,15 @@
 
             const keyInput =
                 document.getElementById(
-                    "key-" + index
+                    "key-" +
+                    index
                 );
 
 
             const result =
                 document.getElementById(
-                    "result-" + index
+                    "result-" +
+                    index
                 );
 
 
@@ -1348,10 +1441,8 @@
                 result.style.display =
                     "block";
 
-
                 result.className =
                     "result error";
-
 
                 result.textContent =
                     "Please enter a secret key.";
@@ -1364,10 +1455,8 @@
             result.style.display =
                 "block";
 
-
             result.className =
                 "result";
-
 
             result.textContent =
                 "Attempting to decrypt...";
@@ -1387,24 +1476,24 @@
 
 
                 result.innerHTML =
-                    "<strong>Decrypted Message:</strong><br>";
-
-
-                const text =
-                    document.createTextNode(
-                        plaintext
-                    );
+                    "<strong>" +
+                    "Decrypted Message:" +
+                    "</strong><br>";
 
 
                 result.appendChild(
-                    text
+                    document.createTextNode(
+                        plaintext
+                    )
                 );
 
             }
 
             catch (error) {
 
-                console.error(error);
+                console.error(
+                    error
+                );
 
 
                 result.className =
@@ -1419,11 +1508,14 @@
         }
 
 
+
         /* =====================================================
            FORMAT DATE
         ===================================================== */
 
-        function formatDate(date) {
+        function formatDate(
+            date
+        ) {
 
             if (
                 isNaN(
@@ -1440,6 +1532,7 @@
                 undefined,
                 {
                     dateStyle: "medium",
+
                     timeStyle: "short"
                 }
             );
