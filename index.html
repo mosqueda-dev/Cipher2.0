@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CipherShare</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #60a5fa;
+        }
+
+        .status {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        /* =========================
+           CREATE CARD
+        ========================= */
+
+        .create-card {
+            background: white;
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            margin-bottom: 35px;
+        }
+
+        .create-card h1 {
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        .create-card p {
+            color: #6b7280;
+            margin-bottom: 25px;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        textarea,
+        input {
+            width: 100%;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            padding: 13px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        textarea:focus,
+        input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* =========================
+           KEY INPUT
+        ========================= */
+
+        .key-wrapper {
+            position: relative;
+        }
+
+        .toggle-key {
+            position: absolute;
+            right: 12px;
+            top: 11px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .primary-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            padding: 13px 22px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .primary-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .primary-btn:disabled {
+            background: #93c5fd;
+            cursor: not-allowed;
+        }
+
+        /* =========================
+           FEED HEADER
+        ========================= */
+
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .feed-header h2 {
+            font-size: 24px;
+        }
+
+        .refresh-btn {
+            border: 1px solid #d1d5db;
+            background: white;
+            padding: 9px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .refresh-btn:hover {
+            background: #f3f4f6;
+        }
+
+        /* =========================
+           FEED
+        ========================= */
+
+        .feed {
+            display: grid;
+            gap: 18px;
+        }
+
+        .message-card {
+            background: white;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .message-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .message-number {
+            font-weight: bold;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        /* =========================
+           CIPHERTEXT
+        ========================= */
+
+        .cipher-box {
+            background: #111827;
+            color: #d1d5db;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            word-break: break-all;
+            margin-bottom: 15px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        /* =========================
+           DECRYPT AREA
+        ========================= */
+
+        .decrypt-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .decrypt-area input {
+            flex: 1;
+        }
+
+        .decrypt-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .decrypt-btn:hover {
+            background: #059669;
+        }
+
+        /* =========================
+           DECRYPT RESULT
+        ========================= */
+
+        .result {
+            display: none;
+            margin-top: 15px;
+            padding: 14px;
+            border-radius: 8px;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+            word-break: break-word;
+        }
+
+        .result.error {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #991b1b;
+        }
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        .empty {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 12px;
+            color: #6b7280;
+        }
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 18px 20px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .create-card {
+                padding: 22px;
+            }
+
+            .decrypt-area {
+                flex-direction: column;
+            }
+
+            .decrypt-btn {
+                padding: 13px;
+            }
+
+            .feed-header {
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <div class="logo">
+            Cipher<span>Share</span>
+        </div>
+
+        <div
+            class="status"
+            id="connectionStatus"
+        >
+            Connecting...
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+        <!-- =========================
+             CREATE MESSAGE
+        ========================= -->
+
+        <section class="create-card">
+
+            <h1>
+                Create Encrypted Message
+            </h1>
+
+            <p>
+                Write a message and protect it with
+                a secret key. Other users can try to
+                decrypt it.
+            </p>
+
+
+            <!-- MESSAGE -->
+
+            <div class="form-group">
+
+                <label for="message">
+                    Message
+                </label>
+
+                <textarea
+                    id="message"
+                    placeholder="Enter your secret message..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- SECRET KEY -->
+
+            <div class="form-group">
+
+                <label for="secretKey">
+                    Secret Key
+                </label>
+
+                <div class="key-wrapper">
+
+                    <input
+                        type="password"
+                        id="secretKey"
+                        placeholder="Enter your secret key..."
+                    >
+
+                    <button
+                        class="toggle-key"
+                        onclick="toggleKey('secretKey')"
+                        type="button"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ENCRYPT BUTTON -->
+
+            <button
+                class="primary-btn"
+                id="encryptBtn"
+                onclick="createMessage()"
+            >
+                Encrypt & Publish
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             PUBLIC FEED
+        ========================= -->
+
+        <section>
+
+            <div class="feed-header">
+
+                <h2>
+                    Public Cipher Feed
+                </h2>
+
+                <button
+                    class="refresh-btn"
+                    onclick="loadMessages()"
+                >
+                    Refresh
+                </button>
+
+            </div>
+
+
+            <div
+                id="feed"
+                class="feed"
+            >
+
+                <div class="loading">
+                    Loading messages...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        /* =====================================================
+           GOOGLE APPS SCRIPT URL
+        ===================================================== */
+
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbwrff47JcTFG5N1lPnNLD82kGJBpm4p_jmAASknBG91KMAG0nu1t2Kw7foOOrE6xz8nrg/exec";
+
+
+        /* =====================================================
+           INITIALIZE
+        ===================================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                loadMessages();
+
+            }
+        );
+
+
+        /* =====================================================
+           SHOW / HIDE SECRET KEY
+        ===================================================== */
+
+        function toggleKey(id) {
+
+            const input =
+                document.getElementById(id);
+
+            const button =
+                input.parentElement.querySelector(
+                    ".toggle-key"
+                );
+
+
+            if (input.type === "password") {
+
+                input.type = "text";
+
+                button.textContent = "Hide";
+
+            } else {
+
+                input.type = "password";
+
+                button.textContent = "Show";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           DERIVE AES KEY USING PBKDF2
+        ===================================================== */
+
+        async function deriveKey(
+            password,
+            salt
+        ) {
+
+            const encoder =
+                new TextEncoder();
+
+
+            const passwordBytes =
+                encoder.encode(password);
+
+
+            const baseKey =
+                await crypto.subtle.importKey(
+                    "raw",
+                    passwordBytes,
+                    "PBKDF2",
+                    false,
+                    [
+                        "deriveKey"
+                    ]
+                );
+
+
+            return crypto.subtle.deriveKey(
+                {
+                    name: "PBKDF2",
+
+                    salt: salt,
+
+                    iterations: 100000,
+
+                    hash: "SHA-256"
+                },
+
+                baseKey,
+
+                {
+                    name: "AES-GCM",
+
+                    length: 256
+                },
+
+                false,
+
+                [
+                    "encrypt",
+                    "decrypt"
+                ]
+            );
+
+        }
+
+
+        /* =====================================================
+           ARRAY BUFFER TO BASE64
+        ===================================================== */
+
+        function arrayBufferToBase64(
+            buffer
+        ) {
+
+            const bytes =
+                new Uint8Array(buffer);
+
+            let binary = "";
+
+            const chunkSize = 0x8000;
+
+
+            for (
+                let i = 0;
+                i < bytes.length;
+                i += chunkSize
+            ) {
+
+                binary +=
+                    String.fromCharCode(
+                        ...bytes.subarray(
+                            i,
+                            Math.min(
+                                i + chunkSize,
+                                bytes.length
+                            )
+                        )
+                    );
+
+            }
+
+
+            return btoa(binary);
+
+        }
+
+
+        /* =====================================================
+           BASE64 TO ARRAY BUFFER
+        ===================================================== */
+
+        function base64ToArrayBuffer(
+            base64
+        ) {
+
+            const binary =
+                atob(base64);
+
+
+            const bytes =
+                new Uint8Array(
+                    binary.length
+                );
+
+
+            for (
+                let i = 0;
+                i < binary.length;
+                i++
+            ) {
+
+                bytes[i] =
+                    binary.charCodeAt(i);
+
+            }
+
+
+            return bytes.buffer;
+
+        }
+
+
+        /* =====================================================
+           ENCRYPT MESSAGE
+           
+           FORMAT:
+
+           SALT.IV.CIPHERTEXT
+        ===================================================== */
+
+        async function encryptMessage(
+            plaintext,
+            password
+        ) {
+
+            const encoder =
+                new TextEncoder();
+
+
+            /* Generate random salt */
+
+            const salt =
+                crypto.getRandomValues(
+                    new Uint8Array(16)
+                );
+
+
+            /* Generate random IV */
+
+            const iv =
+                crypto.getRandomValues(
+                    new Uint8Array(12)
+                );
+
+
+            /* Generate AES key */
+
+            const key =
+                await deriveKey(
+                    password,
+                    salt
+                );
+
+
+            /* Encrypt */
+
+            const encrypted =
+                await crypto.subtle.encrypt(
+                    {
+                        name: "AES-GCM",
+
+                        iv: iv
+                    },
+
+                    key,
+
+                    encoder.encode(
+                        plaintext
+                    )
+                );
+
+
+            /* Convert to Base64 */
+
+            const saltBase64 =
+                arrayBufferToBase64(
+                    salt
+                );
+
+
+            const ivBase64 =
+                arrayBufferToBase64(
+                    iv
+                );
+
+
+            const cipherBase64 =
+                arrayBufferToBase64(
+                    encrypted
+                );
+
+
+            /* Final ciphertext */
+
+            return (
+                saltBase64 +
+                "." +
+                ivBase64 +
+                "." +
+                cipherBase64
+            );
+
+        }
+
+
+        /* =====================================================
+           DECRYPT MESSAGE
+        ===================================================== */
+
+        async function decryptMessage(
+            encryptedText,
+            password
+        ) {
+
+            const parts =
+                encryptedText.split(".");
+
+
+            if (parts.length !== 3) {
+
+                throw new Error(
+                    "Invalid ciphertext format."
+                );
+
+            }
+
+
+            /* Extract salt */
+
+            const salt =
+                new Uint8Array(
+                    base64ToArrayBuffer(
+                        parts[0]
+                    )
+                );
+
+
+            /* Extract IV */
+
+            const iv =
+                new Uint8Array(
+                    base64ToArrayBuffer(
+                        parts[1]
+                    )
+                );
+
+
+            /* Extract ciphertext */
+
+            const ciphertext =
+                base64ToArrayBuffer(
+                    parts[2]
+                );
+
+
+            /* Derive key */
+
+            const key =
+                await deriveKey(
+                    password,
+                    salt
+                );
+
+
+            /* Decrypt */
+
+            const decrypted =
+                await crypto.subtle.decrypt(
+                    {
+                        name: "AES-GCM",
+
+                        iv: iv
+                    },
+
+                    key,
+
+                    ciphertext
+                );
+
+
+            return new TextDecoder()
+                .decode(
+                    decrypted
+                );
+
+        }
+
+
+        /* =====================================================
+           CREATE AND PUBLISH MESSAGE
+        ===================================================== */
+
+        async function createMessage() {
+
+            const message =
+                document
+                    .getElementById("message")
+                    .value
+                    .trim();
+
+
+            const key =
+                document
+                    .getElementById("secretKey")
+                    .value
+                    .trim();
+
+
+            const button =
+                document.getElementById(
+                    "encryptBtn"
+                );
+
+
+            /* Validate message */
+
+            if (!message) {
+
+                alert(
+                    "Please enter a message."
+                );
+
+                return;
+
+            }
+
+
+            /* Validate key */
+
+            if (!key) {
+
+                alert(
+                    "Please enter a secret key."
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                button.disabled = true;
+
+                button.textContent =
+                    "Encrypting...";
+
+
+                /* Encrypt locally */
+
+                const cipherText =
+                    await encryptMessage(
+                        message,
+                        key
+                    );
+
+
+                /* Send to Apps Script */
+
+                const response =
+                    await fetch(
+                        API_URL,
+                        {
+                            method: "POST",
+
+                            body: JSON.stringify({
+
+                                cipherText:
+                                    cipherText,
+
+                                plaintext:
+                                    message,
+
+                                key:
+                                    key
+
+                            })
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (!result.success) {
+
+                    throw new Error(
+                        result.error ||
+                        "Failed to save message."
+                    );
+
+                }
+
+
+                /* Clear fields */
+
+                document
+                    .getElementById("message")
+                    .value = "";
+
+
+                document
+                    .getElementById("secretKey")
+                    .value = "";
+
+
+                alert(
+                    "Message encrypted and published!"
+                );
+
+
+                /* Refresh feed */
+
+                loadMessages();
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Error: " +
+                    error.message
+                );
+
+            }
+
+            finally {
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Encrypt & Publish";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           LOAD PUBLIC FEED
+        ===================================================== */
+
+        async function loadMessages() {
+
+            const feed =
+                document.getElementById(
+                    "feed"
+                );
+
+
+            const status =
+                document.getElementById(
+                    "connectionStatus"
+                );
+
+
+            feed.innerHTML = `
+                <div class="loading">
+                    Loading messages...
+                </div>
+            `;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL +
+                        "?action=messages"
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!data.success) {
+
+                    throw new Error(
+                        data.error ||
+                        "Failed to load messages."
+                    );
+
+                }
+
+
+                status.textContent =
+                    "Connected";
+
+
+                displayMessages(
+                    data.messages
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+
+                status.textContent =
+                    "Connection error";
+
+
+                feed.innerHTML = `
+                    <div class="empty">
+                        Unable to load the public feed.
+                        <br><br>
+                        Please check your Google Apps Script
+                        deployment and permissions.
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           DISPLAY PUBLIC MESSAGES
+        ===================================================== */
+
+        function displayMessages(
+            messages
+        ) {
+
+            const feed =
+                document.getElementById(
+                    "feed"
+                );
+
+
+            /* No messages */
+
+            if (
+                !messages ||
+                messages.length === 0
+            ) {
+
+                feed.innerHTML = `
+                    <div class="empty">
+                        No encrypted messages yet.
+                        <br>
+                        Be the first to publish one!
+                    </div>
+                `;
+
+                return;
+
+            }
+
+
+            feed.innerHTML = "";
+
+
+            messages.forEach(
+                function (
+                    message,
+                    index
+                ) {
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "message-card";
+
+
+                    const date =
+                        new Date(
+                            message.timestamp
+                        );
+
+
+                    /*
+                     * Build card using DOM instead
+                     * of inserting untrusted
+                     * ciphertext directly.
+                     */
+
+                    const top =
+                        document.createElement(
+                            "div"
+                        );
+
+                    top.className =
+                        "message-top";
+
+
+                    const number =
+                        document.createElement(
+                            "div"
+                        );
+
+                    number.className =
+                        "message-number";
+
+
+                    number.textContent =
+                        "Message #" +
+                        (messages.length - index);
+
+
+                    const timestamp =
+                        document.createElement(
+                            "div"
+                        );
+
+                    timestamp.className =
+                        "timestamp";
+
+
+                    timestamp.textContent =
+                        formatDate(date);
+
+
+                    top.appendChild(
+                        number
+                    );
+
+                    top.appendChild(
+                        timestamp
+                    );
+
+
+                    /* Ciphertext */
+
+                    const cipherBox =
+                        document.createElement(
+                            "div"
+                        );
+
+                    cipherBox.className =
+                        "cipher-box";
+
+
+                    cipherBox.textContent =
+                        message.cipherText;
+
+
+                    /* Decrypt area */
+
+                    const decryptArea =
+                        document.createElement(
+                            "div"
+                        );
+
+                    decryptArea.className =
+                        "decrypt-area";
+
+
+                    const keyInput =
+                        document.createElement(
+                            "input"
+                        );
+
+
+                    keyInput.type =
+                        "password";
+
+
+                    keyInput.placeholder =
+                        "Enter secret key...";
+
+
+                    keyInput.id =
+                        "key-" + index;
+
+
+                    const decryptButton =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    decryptButton.className =
+                        "decrypt-btn";
+
+
+                    decryptButton.textContent =
+                        "Decrypt";
+
+
+                    const result =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    result.className =
+                        "result";
+
+
+                    result.id =
+                        "result-" + index;
+
+
+                    decryptButton.onclick =
+                        function () {
+
+                            tryDecrypt(
+                                message.cipherText,
+                                index
+                            );
+
+                        };
+
+
+                    decryptArea.appendChild(
+                        keyInput
+                    );
+
+
+                    decryptArea.appendChild(
+                        decryptButton
+                    );
+
+
+                    card.appendChild(
+                        top
+                    );
+
+
+                    card.appendChild(
+                        cipherBox
+                    );
+
+
+                    card.appendChild(
+                        decryptArea
+                    );
+
+
+                    card.appendChild(
+                        result
+                    );
+
+
+                    feed.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           TRY DECRYPT
+        ===================================================== */
+
+        async function tryDecrypt(
+            cipherText,
+            index
+        ) {
+
+            const keyInput =
+                document.getElementById(
+                    "key-" + index
+                );
+
+
+            const result =
+                document.getElementById(
+                    "result-" + index
+                );
+
+
+            const key =
+                keyInput.value.trim();
+
+
+            if (!key) {
+
+                result.style.display =
+                    "block";
+
+
+                result.className =
+                    "result error";
+
+
+                result.textContent =
+                    "Please enter a secret key.";
+
+                return;
+
+            }
+
+
+            result.style.display =
+                "block";
+
+
+            result.className =
+                "result";
+
+
+            result.textContent =
+                "Attempting to decrypt...";
+
+
+            try {
+
+                const plaintext =
+                    await decryptMessage(
+                        cipherText,
+                        key
+                    );
+
+
+                result.className =
+                    "result";
+
+
+                result.innerHTML =
+                    "<strong>Decrypted Message:</strong><br>";
+
+
+                const text =
+                    document.createTextNode(
+                        plaintext
+                    );
+
+
+                result.appendChild(
+                    text
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+
+                result.className =
+                    "result error";
+
+
+                result.textContent =
+                    "Incorrect key or corrupted ciphertext.";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           FORMAT DATE
+        ===================================================== */
+
+        function formatDate(date) {
+
+            if (
+                isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return "Unknown date";
+
+            }
+
+
+            return date.toLocaleString(
+                undefined,
+                {
+                    dateStyle: "medium",
+                    timeStyle: "short"
+                }
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>
